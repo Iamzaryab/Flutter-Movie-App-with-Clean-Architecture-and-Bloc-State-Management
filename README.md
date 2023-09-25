@@ -65,7 +65,7 @@ The project follows the principles of clean architecture, categorizing code into
 
 - We are employing **[Bloc](https://pub.dev/packages/flutter_bloc)** for our state management
   solution.
-- if you want to check Riverpod implementation for same application, you can review the code in
+- If you want to check Riverpod implementation for same application, you can review the code in
   this [Repository](https://github.com/Iamzaryab/Movie-Application-Flutter-Clean-Architecture-RiverPod)
 
 ### Dependency Injection
