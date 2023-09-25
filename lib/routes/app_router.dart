@@ -1,5 +1,5 @@
+import 'package:filmku/features/home/presentation/screens/home_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:filmku/features/home/presentation/screens/home_page.dart';
 import 'package:filmku/features/movie_detail/presentation/screen/movie_detail_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,7 +21,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         name: Routes.home.name,
-        builder: (context, state) => HomePage(
+        builder: (context, state) => HomePageView(
           key: state.pageKey,
         ),
       ),
