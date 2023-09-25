@@ -1,12 +1,12 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:filmku/features/movie_detail/data/datasource/remote/movie_detail_remote_datasource.dart';
 import 'package:filmku/models/movie_detail.dart';
 import 'package:filmku/models/response/casts_response.dart';
+import 'package:filmku/models/response/videos_response.dart';
 import 'package:filmku/shared/util/app_exception.dart';
 import 'package:filmku/shared/network/network_service.dart';
 import 'package:filmku/shared/network/network_values.dart';
-
-
 
 class MovieDetailRemoteDataSourceImpl extends MovieDetailRemoteDataSource {
   final NetworkService networkService;
@@ -14,10 +14,8 @@ class MovieDetailRemoteDataSourceImpl extends MovieDetailRemoteDataSource {
   MovieDetailRemoteDataSourceImpl({required this.networkService});
 
   @override
-  Future<Either<AppException, MovieDetail>> getMovie(
-      {required int id}) async {
-    final response =
-        await networkService.get(EndPoints.movie(id));
+  Future<Either<AppException, MovieDetail>> getMovie({required int id}) async {
+    final response = await networkService.get(EndPoints.movie(id));
     return response.fold((l) => Left(l), (r) {
       final jsonData = r.data;
       if (jsonData == null) {
@@ -36,8 +34,7 @@ class MovieDetailRemoteDataSourceImpl extends MovieDetailRemoteDataSource {
   @override
   Future<Either<AppException, CastsResponse>> getCasts(
       {required int id}) async {
-    final response =
-        await networkService.get(EndPoints.casts(id));
+    final response = await networkService.get(EndPoints.casts(id));
     return response.fold((l) => Left(l), (r) {
       final jsonData = r.data;
       if (jsonData == null) {
@@ -49,6 +46,27 @@ class MovieDetailRemoteDataSourceImpl extends MovieDetailRemoteDataSource {
       } else {
         final castsResponse = CastsResponse(jsonData['cast'] ?? []);
         return Right(castsResponse);
+      }
+    });
+  }
+
+  @override
+  Future<Either<AppException, VideosResponse>> getVideos(
+      {required int id}) async {
+    final response = await networkService.get(EndPoints.videos(id));
+
+    return response.fold((failure) => Left(failure), (success) {
+      final jsonData = success.data;
+      if (jsonData == null) {
+        return Left(AppException(
+            message: 'The data is not valid',
+            statusCode: 0,
+            identifier: EndPoints.videos(id),
+            which: 'remote'));
+      } else {
+        final videosResponse =
+            VideosResponse(videos: jsonData['results'], id: jsonData['id']);
+        return Right(videosResponse);
       }
     });
   }

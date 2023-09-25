@@ -7,8 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MovieDetailScreenView extends StatefulWidget {
   final int movieId;
 
-  const MovieDetailScreenView({Key? key, required this.movieId})
-      : super(key: key);
+  const MovieDetailScreenView({Key? key, required this.movieId}) : super(key: key);
 
   @override
   State<MovieDetailScreenView> createState() => _MovieDetailScreenViewState();

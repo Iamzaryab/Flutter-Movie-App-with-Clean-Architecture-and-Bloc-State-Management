@@ -6,6 +6,7 @@ class EndPoints {
   static String movie(id) => 'movie/$id';
 
   static String casts(int id) => '/movie/$id/credits';
+  static String videos(int id) => '/movie/$id/videos';
 }
 
 class Params {

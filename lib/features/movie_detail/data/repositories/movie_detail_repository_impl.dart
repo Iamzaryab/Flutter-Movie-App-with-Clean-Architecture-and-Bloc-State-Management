@@ -4,25 +4,26 @@ import 'package:filmku/features/movie_detail/data/datasource/remote/movie_detail
 import 'package:filmku/features/movie_detail/domain/repositories/movie_detail_repository.dart';
 import 'package:filmku/models/movie_detail.dart';
 import 'package:filmku/models/response/casts_response.dart';
+import 'package:filmku/models/response/videos_response.dart';
 
 import 'package:filmku/shared/util/app_exception.dart';
 
 class MovieDetailRepositoryImpl extends MovieDetailRepository {
-  final MovieDetailRemoteDataSource movieDetailDataSource;
+  final MovieDetailRemoteDataSource movieDetailRemoteDataSource;
   final MovieDetailLocalDataSource movieDetailLocalDataSource;
 
   MovieDetailRepositoryImpl(
-      {required this.movieDetailDataSource,
+      {required this.movieDetailRemoteDataSource,
       required this.movieDetailLocalDataSource});
 
   @override
   Future<Either<AppException, MovieDetail>> getMovie({required int id}) async {
-    return movieDetailDataSource.getMovie(id: id);
+    return movieDetailRemoteDataSource.getMovie(id: id);
   }
 
   @override
   Future<Either<AppException, CastsResponse>> getCasts({required int id}) {
-    return movieDetailDataSource.getCasts(id: id);
+    return movieDetailRemoteDataSource.getCasts(id: id);
   }
 
   @override
@@ -38,5 +39,10 @@ class MovieDetailRepositoryImpl extends MovieDetailRepository {
   @override
   Future<bool> isBookmarked(int id) {
     return movieDetailLocalDataSource.isBookmarked(id);
+  }
+
+  @override
+  Future<Either<AppException, VideosResponse>> getVideos({required int id}) {
+    return movieDetailRemoteDataSource.getVideos(id: id);
   }
 }
