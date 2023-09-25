@@ -14,8 +14,8 @@ class AppColors {
   static const Color primaryDark = Color(0xFF5E5A75);
   static const Color secondaryDark = Color(0xFF6E6E6E);
   static const Color backgroundDark = Color(0xff121212);
-  static const Color bottomSheetDark = Color(0xff0E0E0E);
-  static const Color bottomSheetShadowDark = Color(0xff1E1E1E);
+  static const Color bottomSheetDark = Color(0xff2a2a2a);
+  static const Color bottomSheetShadowDark = Color(0xff333333);
   static const Color drawerDark = Color(0xff1A1A1A);
   static const Color drawerShadowDark = Color(0xff2A2A2A);
 
