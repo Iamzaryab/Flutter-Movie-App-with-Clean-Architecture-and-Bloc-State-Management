@@ -22,6 +22,7 @@ import 'package:filmku/features/movie_detail/data/repositories//movie_detail_rep
 import 'package:filmku/features/movie_detail/domain/use_cases/add_bookmark_use_case.dart';
 import 'package:filmku/features/movie_detail/domain/use_cases/get_casts_use_case.dart';
 import 'package:filmku/features/movie_detail/domain/use_cases/get_movie_details_use_case.dart';
+import 'package:filmku/features/movie_detail/domain/use_cases/get_videos_use_case.dart';
 import 'package:filmku/features/movie_detail/domain/use_cases/is_bookmark_use_case.dart';
 import 'package:filmku/features/movie_detail/domain/use_cases/remove_bookmark_use_case.dart';
 import 'package:filmku/features/notifications/data/datasource/local/notifications_local_datasource.dart';
@@ -83,7 +84,7 @@ void provideRepositories() {
   //MovieDetail
   injector.registerFactory<MovieDetailRepository>(() =>
       MovieDetailRepositoryImpl(
-          movieDetailDataSource: injector.get<MovieDetailRemoteDataSource>(),
+          movieDetailRemoteDataSource: injector.get<MovieDetailRemoteDataSource>(),
           movieDetailLocalDataSource:
               injector.get<MovieDetailLocalDataSource>()));
 
@@ -110,6 +111,7 @@ void provideUseCases() {
   injector.registerFactory<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(movieDetailRepository: injector.get<MovieDetailRepository>()));
   injector.registerFactory<IsBookmarkedUseCase>(() => IsBookmarkedUseCase(movieDetailRepository: injector.get<MovieDetailRepository>()));
   injector.registerFactory<RemoveBookmarkUseCase>(() => RemoveBookmarkUseCase(movieDetailRepository: injector.get<MovieDetailRepository>()));
+  injector.registerFactory(() => GetVideosUseCase(movieDetailRemoteDataSource: injector.get<MovieDetailRemoteDataSource>()));
 
   //Bookmarks
   injector.registerFactory<GetBookmarksUseCase>(() => GetBookmarksUseCase(bookmarkRepository: injector.get<BookmarkRepository>()));
