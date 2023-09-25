@@ -14,8 +14,7 @@ class InitDbImpl extends LocalDb {
   @override
   Future<void> initDb() async {
     final dir = await getApplicationDocumentsDirectory();
-    db = await Isar.open(
-      [MoviesSchema, GenresSchema, MovieDetailSchema, NotificationModelSchema],
+    db = await Isar.open([MoviesSchema, GenresSchema, MovieDetailSchema, NotificationModelSchema],
       directory: dir.path,
     );
   }
