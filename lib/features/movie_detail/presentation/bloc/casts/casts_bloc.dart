@@ -46,7 +46,7 @@ class CastsBloc extends Bloc<CastsEvent, CastsState> {
       emit(state.copyWith(
           state: CastConcreteState.loaded,
           casts: casts,
-          hasData: false,
+          hasData: true,
           message: casts.isEmpty ? 'no casts found' : '',
           isLoading: false));
     });

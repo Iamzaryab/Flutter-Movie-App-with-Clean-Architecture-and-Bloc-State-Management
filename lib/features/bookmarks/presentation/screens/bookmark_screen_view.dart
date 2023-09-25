@@ -28,7 +28,10 @@ class _BookmarkScreenViewState extends State<BookmarkScreenView> {
               scrollDirection: Axis.vertical,
               itemCount: state.bookmarks.length,
               itemBuilder: (context, index) {
-                return BookmarkCard(movieDetail: state.bookmarks[index]);
+                return BookmarkCard(movieDetail: state.bookmarks[index],onDisLike: (){
+                  context.read<BookmarkBloc>().add(RemoveBookmarkEvent(
+                      movieDetail: state.bookmarks[index]));
+                },);
               })
               : state.state == BookmarkConcreteState.loading
               ? const Center(child: CircularProgressIndicator())
